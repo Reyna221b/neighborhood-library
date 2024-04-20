@@ -48,7 +48,7 @@ public class Book
         return checkedOutTo;
     }
 
-    public void setCheckedOutTo(String checkedOut)
+    public void setCheckedOutTo(String checkedOutTo)
     {
         this.checkedOutTo = checkedOutTo;
     }
@@ -57,9 +57,9 @@ public class Book
     {
         return isCheckedOut;
     }
-    public void setIsCheckedOut(boolean ischeckedOut)
+    public void setIsCheckedOut(boolean isCheckedOut)
     {
-        this.isCheckedOut = ischeckedOut;
+        this.isCheckedOut = isCheckedOut;
     }
 
     //checkOut(name) function

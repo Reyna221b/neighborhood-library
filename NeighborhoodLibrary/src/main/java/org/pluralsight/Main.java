@@ -35,18 +35,29 @@ public class Main
 
         System.out.println("Welcome to the neighborhood Library!");
         while (userChoice != 3) {
-            userChoice = getHomeScreenSelection();
+            userChoice = getHomeScreenChoice();
 
             switch (userChoice)
             {
                 case 1:
-                    showAvailableBooks(books);
+                    availableBooks(books);
+                    break;
+                case 2:
+                    checkedOutBooks(books);
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("Thank you for visiting the NeighborHood Library!\nGoodbye!");
+                    return;
+                default:
+                    System.out.println();
+                    System.out.println("Sorry that is not an option.");
                     break;
             }
 
         }
     }
-    public static int getHomeScreenSelection()
+    public static int getHomeScreenChoice()
     {
         System.out.println();
         System.out.println("What would you like to do?");
@@ -59,18 +70,19 @@ public class Main
         return Integer.parseInt(userInput.nextLine());
     }
 
-    public static void showAvailableBooks(Book[] books)
+    public static void availableBooks(Book[] books)
     {
         System.out.println();
         System.out.println("All Available Books\n ");
         System.out.println("----------------------------------------");
 
-        // first    last    age
         for (Book book : books) {
-            System.out.printf("ID:%-5d Title:%-30s ISBN:%-30s\n",
-                    book.getId(), book.getTitle(),book.getIsbn());
+            if(!book.getIsCheckedOut()){
+                System.out.printf("ID:%-5d Title:%-30s ISBN:%-30s\n",
+                        book.getId(), book.getTitle(),book.getIsbn());
+            }
         }
-
+        checkOutDisplay(books);
 
     }
 
@@ -82,24 +94,70 @@ public class Main
         System.out.println("X - Exit to Home");
         System.out.println();
         System.out.print("Enter your choice: ");
-        String option = userInput.nextLine();
+        String option = userInput.nextLine().strip();
 
         if(option.equalsIgnoreCase("c"))
         {
-            System.out.println("What book would you like to check out?\n");
-            System.out.print("Enter the ID of the book: ");
-            int choice = Integer.parseInt(userInput.nextLine());
+            System.out.println("What book would you like to check out?");
+            System.out.print("Please enter the ID of the book: ");
+            int choice = Integer.parseInt(userInput.nextLine().strip());
 
-            System.out.print("What is your name?");
-            String name = userInput.nextLine();
-            for (int i = 0; i < books.length; i++){
-                if(books[i].getId() == choice){
-                    books[i].checkOut(name);
+            System.out.print("What is your name? ");
+            String name = userInput.nextLine().strip();
+            for (Book book : books) {
+                if (book.getId() == choice) {
+                    book.checkOut(name);
+
                 }
             }
-            System.out.println("Thank you for checking out a book!\n");
+            System.out.println("\nThank you for checking out a book " + name + "!!\n");
         }
     }
+
+    public static void checkedOutBooks(Book[] books)
+    {
+        System.out.println();
+        System.out.println("All Checked Out Books\n ");
+        System.out.println("----------------------------------------");
+
+        // first    last    age
+        for (Book book : books) {
+            if(book.getIsCheckedOut()){
+                System.out.printf("ID:%-5d Title:%-30s ISBN:%-30s Checked Out By:%-10s\n",
+                        book.getId(), book.getTitle(),book.getIsbn(),book.getCheckedOutTo());
+            }
+        }
+        checkInDisplay(books);
+
+    }
+    public static void checkInDisplay(Book[]books)
+    {
+        //System.out.println("What would you like to do?\n");
+        System.out.println("----------------------------------------");
+        System.out.println("C - Check In a Book");
+        System.out.println("X - Exit to Home");
+        System.out.println();
+        System.out.print("Enter your choice: ");
+        String option = userInput.nextLine().strip();
+
+        if(option.equalsIgnoreCase("c"))
+        {
+            System.out.println("What book would you like to check in?");
+            System.out.print("Please enter the ID of the book: ");
+            int choice = Integer.parseInt(userInput.nextLine().strip());
+
+            for (Book book : books) {
+                if (book.getId() == choice) {
+                    System.out.printf("\nThank you for checking in the %s %s" ,book.getTitle(), book.getCheckedOutTo() + "!!\n");
+                    book.checkIn();
+
+                }
+            }
+
+        }
+    }
+
+
 
 
 }
