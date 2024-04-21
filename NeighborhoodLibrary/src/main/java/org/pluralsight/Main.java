@@ -57,6 +57,7 @@ public class Main
 
         }
     }
+
     public static int getHomeScreenChoice()
     {
         System.out.println();
@@ -73,17 +74,25 @@ public class Main
     public static void availableBooks(Book[] books)
     {
         System.out.println();
-        System.out.println("All Available Books\n ");
+        System.out.println("All Available Books");
         System.out.println("----------------------------------------");
+        boolean noDisplay = true;
 
         for (Book book : books) {
             if(!book.getIsCheckedOut()){
                 System.out.printf("ID:%-5d Title:%-30s ISBN:%-30s\n",
                         book.getId(), book.getTitle(),book.getIsbn());
+                noDisplay = false;
             }
         }
-        checkOutDisplay(books);
-
+        if(noDisplay){
+            System.out.println( "Sorry there are currently no available books :(");
+            System.out.println("Taking you back to Home Menu");
+        }
+        else
+        {
+            checkOutDisplay(books);
+        }
     }
 
     public static void checkOutDisplay(Book[]books)
@@ -98,41 +107,52 @@ public class Main
 
         if(option.equalsIgnoreCase("c"))
         {
-            System.out.println("What book would you like to check out?");
             System.out.print("Please enter the ID of the book: ");
             int choice = Integer.parseInt(userInput.nextLine().strip());
 
-            System.out.print("What is your name? ");
-            String name = userInput.nextLine().strip();
             for (Book book : books) {
                 if (book.getId() == choice) {
+                    System.out.print("What is your name? ");
+                    String name = userInput.nextLine().strip();
                     book.checkOut(name);
-
                 }
             }
-            System.out.println("\nThank you for checking out a book " + name + "!!\n");
         }
+        else if (option.equalsIgnoreCase("x"))
+        {
+            System.out.println("Back to Home Menu! ");
+        }
+        else
+        {
+            System.out.println("Invalid selection...Back to Home Menu!");
+        }
+
     }
 
     public static void checkedOutBooks(Book[] books)
     {
         System.out.println();
-        System.out.println("All Checked Out Books\n ");
+        System.out.println("All Checked Out Books");
         System.out.println("----------------------------------------");
-
-        // first    last    age
+        boolean noDisplay = true;
         for (Book book : books) {
             if(book.getIsCheckedOut()){
                 System.out.printf("ID:%-5d Title:%-30s ISBN:%-30s Checked Out By:%-10s\n",
                         book.getId(), book.getTitle(),book.getIsbn(),book.getCheckedOutTo());
+                noDisplay = false;
             }
         }
-        checkInDisplay(books);
+        if(noDisplay)
+        {
+            System.out.println( "There are currently no checked out books");
+        }
 
+        checkInDisplay(books);
     }
+
     public static void checkInDisplay(Book[]books)
     {
-        //System.out.println("What would you like to do?\n");
+
         System.out.println("----------------------------------------");
         System.out.println("C - Check In a Book");
         System.out.println("X - Exit to Home");
@@ -142,22 +162,23 @@ public class Main
 
         if(option.equalsIgnoreCase("c"))
         {
-            System.out.println("What book would you like to check in?");
             System.out.print("Please enter the ID of the book: ");
             int choice = Integer.parseInt(userInput.nextLine().strip());
 
             for (Book book : books) {
                 if (book.getId() == choice) {
-                    System.out.printf("\nThank you for checking in the %s %s" ,book.getTitle(), book.getCheckedOutTo() + "!!\n");
                     book.checkIn();
-
                 }
             }
 
+        } else if (option.equalsIgnoreCase("x"))
+        {
+            System.out.println("Back to Home Menu! ");
+        }
+        else
+        {
+            System.out.println("Invalid selection...Back to Home Menu!");
         }
     }
-
-
-
 
 }

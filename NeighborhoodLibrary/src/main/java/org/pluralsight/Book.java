@@ -66,15 +66,34 @@ public class Book
     //have to set the new name and state it as true
     public void checkOut(String name)
     {
-        setCheckedOutTo(name);
-        setIsCheckedOut(true);
+        if(isCheckedOut){
+
+            System.out.println("Sorry this book is already checked out.");
+            System.out.println("*******Returning to Home Menu!*******");
+        }
+        else{
+            setCheckedOutTo(name);
+            setIsCheckedOut(true);
+            System.out.printf("\nThank you for checking out %s, %s",getTitle(),getCheckedOutTo() + "!!\n");
+        }
+
     }
 
     //checkIn()
     public void checkIn()
     {
-        setCheckedOutTo("");
-        setIsCheckedOut(false);
+        if(!isCheckedOut){
+
+            System.out.println("Sorry this book is currently NOT checked out.");
+            System.out.println("******Returning to Home Menu!*******");
+        }
+        else
+        {
+            System.out.printf("\nThank you for checking in %s, %s" ,getTitle(),getCheckedOutTo() + "!!\n");
+            setCheckedOutTo("");
+            setIsCheckedOut(false);
+        }
+
     }
 
 
