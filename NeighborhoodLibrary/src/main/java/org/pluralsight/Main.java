@@ -61,8 +61,8 @@ public class Main
     public static int getHomeScreenChoice()
     {
         System.out.println();
-        System.out.println("What would you like to do?");
-        System.out.println();
+        System.out.println("Home Screen!");
+        System.out.println("---------------------------------");
         System.out.println("1 - Show Available Books");
         System.out.println("2 - Show Checked Out Books");
         System.out.println("3 - Exit");
@@ -75,7 +75,7 @@ public class Main
     {
         System.out.println();
         System.out.println("All Available Books");
-        System.out.println("----------------------------------------");
+        System.out.println("-".repeat(68));
         boolean noDisplay = true;
 
         for (Book book : books) {
@@ -98,10 +98,10 @@ public class Main
     public static void checkOutDisplay(Book[]books)
     {
         //System.out.println("What would you like to do?\n");
-        System.out.println("----------------------------------------");
+        System.out.println("-".repeat(68));
         System.out.println("C - Check Out a Book");
         System.out.println("X - Exit to Home");
-        System.out.println();
+        System.out.println("-".repeat(68));
         System.out.print("Enter your choice: ");
         String option = userInput.nextLine().strip();
 
@@ -133,7 +133,7 @@ public class Main
     {
         System.out.println();
         System.out.println("All Checked Out Books");
-        System.out.println("----------------------------------------");
+        System.out.println("-".repeat(110));
         boolean noDisplay = true;
         for (Book book : books) {
             if(book.getIsCheckedOut()){
@@ -153,10 +153,10 @@ public class Main
     public static void checkInDisplay(Book[]books)
     {
 
-        System.out.println("----------------------------------------");
+        System.out.println("-".repeat(110));
         System.out.println("C - Check In a Book");
         System.out.println("X - Exit to Home");
-        System.out.println();
+        System.out.println("-".repeat(110));
         System.out.print("Enter your choice: ");
         String option = userInput.nextLine().strip();
 

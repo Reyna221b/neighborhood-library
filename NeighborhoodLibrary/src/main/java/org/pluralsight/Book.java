@@ -68,13 +68,14 @@ public class Book
     {
         if(isCheckedOut){
 
-            System.out.println("Sorry this book is already checked out.");
-            System.out.println("*******Returning to Home Menu!*******");
+            System.out.println("\nSorry this book is already checked out.");
+            System.out.println("*******  Returning to Home Menu!  *******");
         }
         else{
             setCheckedOutTo(name);
             setIsCheckedOut(true);
             System.out.printf("\nThank you for checking out %s, %s",getTitle(),getCheckedOutTo() + "!!\n");
+            System.out.print("-".repeat(68)+"\n");
         }
 
     }
@@ -84,12 +85,14 @@ public class Book
     {
         if(!isCheckedOut){
 
-            System.out.println("Sorry this book is currently NOT checked out.");
-            System.out.println("******Returning to Home Menu!*******");
+            System.out.println("\nSorry this book is currently NOT checked out.");
+            System.out.println("******  Returning to Home Menu!  *******");
         }
         else
         {
+
             System.out.printf("\nThank you for checking in %s, %s" ,getTitle(),getCheckedOutTo() + "!!\n");
+            System.out.print("-".repeat(110)+"\n");
             setCheckedOutTo("");
             setIsCheckedOut(false);
         }
