@@ -97,7 +97,6 @@ public class Main
 
     public static void checkOutDisplay(Book[]books)
     {
-        //System.out.println("What would you like to do?\n");
         System.out.println("-".repeat(68));
         System.out.println("C - Check Out a Book");
         System.out.println("X - Exit to Home");
